@@ -40,7 +40,8 @@ const useStyles = makeStyles(theme => ({
   quoteContainer: {
     [theme.breakpoints.down('md')]: {
       display: 'none'
-    }
+    },
+    position: 'relative'
   },
   quote: {
     backgroundColor: theme.palette.neutral,
@@ -48,25 +49,32 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
+    backgroundImage: 'url(/images/login.jpg)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    filter: 'blur(2px)'
   },
   quoteInner: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    },
     textAlign: 'center',
-    flexBasis: '600px'
+    flexBasis: '600px',
+    position: 'absolute',
+    top: '40vh',
+    left: '14vw'
   },
   quoteText: {
-    color: theme.palette.white,
+    color: theme.palette.cyan,
     fontWeight: 300
   },
   name: {
     marginTop: theme.spacing(3),
-    color: theme.palette.white
+    color: theme.palette.cyan
   },
   bio: {
-    color: theme.palette.white
+    color: theme.palette.cyan
   },
   contentContainer: {},
   content: {
@@ -180,16 +188,15 @@ const SignIn = props => {
     <div className={classes.root}>
       <Grid className={classes.grid} container>
         <Grid className={classes.quoteContainer} item lg={5}>
-          <div className={classes.quote}>
-            <div className={classes.quoteInner}>
-              <Typography className={classes.quoteText} variant="h1">
-                Please sign in
+          <div className={classes.quote}></div>
+          <div className={classes.quoteInner}>
+            <Typography className={classes.quoteText} variant="h1">
+              Please sign in
+            </Typography>
+            <div className={classes.person}>
+              <Typography className={classes.name} variant="body1">
+                Email and Password
               </Typography>
-              <div className={classes.person}>
-                <Typography className={classes.name} variant="body1">
-                  Email and Password
-                </Typography>
-              </div>
             </div>
           </div>
         </Grid>
