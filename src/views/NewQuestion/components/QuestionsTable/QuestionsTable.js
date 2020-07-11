@@ -8,8 +8,8 @@ import {
   Card,
   CardActions,
   CardContent,
-  // Avatar,
-  // Checkbox,
+  Avatar,
+  Checkbox,
   Table,
   TableBody,
   TableCell,
@@ -19,7 +19,7 @@ import {
   TablePagination
 } from '@material-ui/core';
 
-// import { getInitials } from 'helpers';
+import { getInitials } from 'helpers';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UsersTable = props => {
+const QuestionsTable = props => {
   const { className, users, ...rest } = props;
 
   const classes = useStyles();
@@ -50,39 +50,39 @@ const UsersTable = props => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
 
-  // const handleSelectAll = event => {
-  //   const { users } = props;
+  const handleSelectAll = event => {
+    const { users } = props;
 
-  //   let selectedUsers;
+    let selectedUsers;
 
-  //   if (event.target.checked) {
-  //     selectedUsers = users.map(user => user.id);
-  //   } else {
-  //     selectedUsers = [];
-  //   }
+    if (event.target.checked) {
+      selectedUsers = users.map(user => user.id);
+    } else {
+      selectedUsers = [];
+    }
 
-  //   setSelectedUsers(selectedUsers);
-  // };
+    setSelectedUsers(selectedUsers);
+  };
 
-  // const handleSelectOne = (event, id) => {
-  //   const selectedIndex = selectedUsers.indexOf(id);
-  //   let newSelectedUsers = [];
+  const handleSelectOne = (event, id) => {
+    const selectedIndex = selectedUsers.indexOf(id);
+    let newSelectedUsers = [];
 
-  //   if (selectedIndex === -1) {
-  //     newSelectedUsers = newSelectedUsers.concat(selectedUsers, id);
-  //   } else if (selectedIndex === 0) {
-  //     newSelectedUsers = newSelectedUsers.concat(selectedUsers.slice(1));
-  //   } else if (selectedIndex === selectedUsers.length - 1) {
-  //     newSelectedUsers = newSelectedUsers.concat(selectedUsers.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelectedUsers = newSelectedUsers.concat(
-  //       selectedUsers.slice(0, selectedIndex),
-  //       selectedUsers.slice(selectedIndex + 1)
-  //     );
-  //   }
+    if (selectedIndex === -1) {
+      newSelectedUsers = newSelectedUsers.concat(selectedUsers, id);
+    } else if (selectedIndex === 0) {
+      newSelectedUsers = newSelectedUsers.concat(selectedUsers.slice(1));
+    } else if (selectedIndex === selectedUsers.length - 1) {
+      newSelectedUsers = newSelectedUsers.concat(selectedUsers.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelectedUsers = newSelectedUsers.concat(
+        selectedUsers.slice(0, selectedIndex),
+        selectedUsers.slice(selectedIndex + 1)
+      );
+    }
 
-  //   setSelectedUsers(newSelectedUsers);
-  // };
+    setSelectedUsers(newSelectedUsers);
+  };
 
   const handlePageChange = (event, page) => {
     setPage(page);
@@ -102,12 +102,8 @@ const UsersTable = props => {
                 <TableRow>
                   <TableCell>Name</TableCell>
                   <TableCell>Mobile/Email</TableCell>
-                  <TableCell>Solize Service</TableCell>
-                  <TableCell>Job Description</TableCell>
-                  <TableCell>Live Agent</TableCell>
-                  <TableCell>Location</TableCell>
-                  <TableCell>Preferred Date</TableCell>
-                  <TableCell>Chat Date</TableCell>
+                  <TableCell>New Question</TableCell>
+                  <TableCell>Date</TableCell>
                   <TableCell>Time</TableCell>
                 </TableRow>
               </TableHead>
@@ -127,20 +123,13 @@ const UsersTable = props => {
                       </div>
                     </TableCell>
                     <TableCell>{user.email}</TableCell>
-                    <TableCell>Some Service</TableCell>
-                    <TableCell>Some Description</TableCell>
-                    <TableCell>Some Live Agent</TableCell>
-                    <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
-                    </TableCell>
+                    <TableCell>Some Question</TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
                     <TableCell>
                       {moment(user.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
-                    <TableCell>{user.phone}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -163,9 +152,9 @@ const UsersTable = props => {
   );
 };
 
-UsersTable.propTypes = {
+QuestionsTable.propTypes = {
   className: PropTypes.string,
   users: PropTypes.array.isRequired
 };
 
-export default UsersTable;
+export default QuestionsTable;
